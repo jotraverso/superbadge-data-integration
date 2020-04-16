@@ -47,6 +47,7 @@ private class BillingCalloutServiceTest {
 		Project__c updatedProject = [SELECT Id, Status__c FROM Project__c WHERE Id = :myProject.Id LIMIT 1];
 		System.assertEquals('Billed', updatedProject.Status__c, 'The Project status was not updated');
 	}
+
 	@IsTest
 	static void testCalloutFailure() {
 		Test.setMock(WebServiceMock.class, new BillingCalloutServiceMockFailure());
@@ -56,6 +57,6 @@ private class BillingCalloutServiceTest {
 		update myProject;
 		Test.stopTest();
 		Project__c updatedProject = [SELECT Id, Status__c FROM Project__c WHERE Id = :myProject.Id LIMIT 1];
-		System.assertEquals('Billable', updatedProject.Status__c, 'The Project status was not updated');
+		System.assertEquals('Billable', updatedProject.Status__c, 'The Project status was updated');
 	}
 }
